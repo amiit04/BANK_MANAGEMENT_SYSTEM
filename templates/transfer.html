@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %} Fund Transfer {% endblock title %}
+{% block body %} 
+<div class="background">
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Fund Transfer</h2>
+
+                    <form action='/transfer' method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="account_number">Account Number</label>
+                            <input type="text" class="form-control" id="account_number" name="account_number" placeholder="Recipient's Account Number" required>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 10px">
+                            <label for="amount">Amount to Transfer</label>
+                            <input type="number" class="form-control" id="amount" name="amount" placeholder="Amount" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Transfer Funds</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock body %}

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Smart Banking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <title>{first_name}</title>
+    </head>
+<body>
+    <style>
+        .background {
+            background-image: url('/static/img/bg1.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: left;
+        }
+    </style>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Smart Banking</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/history">Transaction History</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <!-- Button to trigger uprofile pdate modal -->
+            <button type="button" class="btn btn-success mr-2" data-bs-toggle="modal" data-bs-target="#updateModal">
+                Update Profile
+            </button>
+        </div>
+    </nav>
+
+{% for message in messages  %}            
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <strong>Message : </strong> {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+    </button>
+</div>
+{% endfor %}    
+
+  <!-- ProfileUpdate Modal -->
+  <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="updateModal">Update Details</h1>
+            </div>
+                <div class="modal-body">
+                    <form action="/update" method="post">
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email"  name="email" value={{email}} required>
+                            </div>
+                        <div class="form-group">
+                            <label for="mobile_number">Mobile Number </label>
+                            <input type="text" class="form-control" id="mobile_number" name = "mobile_number" value={{mobile_number}} required>
+                            </div>
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input type="text" class="form-control" id="country" name = "country"  value = {{country}} required>
+                            </div>
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" class="form-control" id="state" name = "state" value = {{state}} required>
+                            </div>
+                        <div class="form-group">
+                            <label for="pincode">Pin Code</label>
+                            <input type="text" class="form-control" id="pincode" name = "pincode" value = {{pincode}} required>
+                            </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <textarea class="form-control" id="address" rows="2" name = "address" value= {{address}} required></textarea>
+                            </div>
+                            {% csrf_token %}
+                        <button type="submit" class="btn btn-success" >Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="background">
+        <div class="container mt-5">
+            <div class="row">
+                <!-- Profile Image Column -->
+                <div class="col-md-4">
+                    <img src="/static/img/user-icon.svg" alt="User Profile Image">
+                </div>
+                <!-- User Information Column -->
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title"> <strong> Customer ID: </strong> {{ customer_id }}</h4>
+                            <p class="card-text"> <strong> Full Name: </strong> {{ name }}</p>
+                            <p class="card-text"> <strong> Father's Name: </strong> {{ father_name }}</p>
+                            <p class="card-text"> <strong> Account Number: </strong> {{ account_number }}</p>
+                            <p class="card-text"> <strong> Balance: $</strong> {{ balance }}</p>
+                            <p class="card-text"> <strong> Email: </strong> {{ email }}</p>
+                            <p class="card-text"> <strong> Country: </strong> {{ country }}</p>
+                            <p class="card-text"> <strong> State: </strong> {{ state }}</p>
+                            <p class="card-text"> <strong> Address: </strong> {{ address }}</p>
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    <!-- Optional JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+ </body>
+</html>
